@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.example.UserMapper">
+    <resultMap id="BaseResultMap" type="com.test.bean.User">
+        <id column="userId" property="userId" jdbcType="INTEGER" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="userPassword" property="userPassword" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--<select id="selectUserById" resultMap="BaseResultMap">
+        resultMap与resultType不同时使用-->
+    <select id="selectUserById"  resultType="com.test.bean.User">
+        select username, userPassword from USER where userId = #{id}
+    </select>
+    <insert id="insertUser" parameterType="com.test.bean.User">
+        INSERT INTO USER(userId, username, userPassword)
+        VALUES (#{userId}, #{username}, #{userPassword})
+    </insert>
+    <!--
+        <update id="updateUser">
+            UPDATE USER SET
+            username = #{username},
+            userPassword = #{userPassword}
+            WHERE userId = #{id}
+        </update>
+        <insert id="insertUser" parameterType="com.test.bean.User" />-->
+
+</mapper>
